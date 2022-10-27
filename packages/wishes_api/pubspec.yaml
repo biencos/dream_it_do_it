@@ -1,0 +1,19 @@
+name: wishes_api
+description: The interface and models for an API providing access to wishes.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  equatable: ^2.0.5
+  json_annotation: ^4.7.0
+  meta: ^1.8.0
+  uuid: ^3.0.6
+
+dev_dependencies:
+  build_runner: ^2.3.2
+  json_serializable: ^6.5.3
+  test: ^1.21.6
+  very_good_analysis: ^3.1.0
