@@ -1,0 +1,22 @@
+name: local_storage_wishes_api
+description: Flutter implementation of the WishesApi that uses local storage.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  meta: ^1.8.0
+  rxdart: ^0.27.5
+  shared_preferences: ^2.0.15
+  wishes_api:
+    path: ../wishes_api
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.1.0
