@@ -2,7 +2,10 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:dream_it_do_it/app/view/app.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wishes_api/wishes_api.dart';
+import 'package:wishes_repository/wishes_repository.dart';
 
 class AppBlocObserver extends BlocObserver {
   @override
@@ -18,15 +21,17 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+void bootstrap({required WishesApi wishesApi}) {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
   Bloc.observer = AppBlocObserver();
 
-  await runZonedGuarded(
-    () async => runApp(await builder()),
+  final wishesRepository = WishesRepository(wishesApi: wishesApi);
+
+  runZonedGuarded(
+    () => runApp(App(wishesRepository: wishesRepository)),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

@@ -33,6 +33,9 @@ $ flutter run --flavor production --target lib/main_production.dart
 
 _\*Dream It Do It works on iOS, Android, Web, and Windows._
 
+
+Dream it do it was the first mobile app that I have created in Flutter. Good times, now it's redone and upgraded with bloc. My inspiration came from [here](https://github.com/felangel/bloc). So I would be grateful if You will give it a star.
+
 ---
 
 ## Running Tests 🧪
