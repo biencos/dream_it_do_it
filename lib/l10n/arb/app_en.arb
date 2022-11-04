@@ -1,7 +1,11 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "showWishesAppBarTitle": "Your Wishes",
+    "@showWishesAppBarTitle": {
+        "description": "Text shown in the AppBar of the Show Wishes Page"
+    },
+    "showWishesNoWishesText": "No wishes yet",
+    "@showWishesNoWishesText": {
+        "description": "Text shown, when the wishes list is empty, in the center of the Show Wishes Page"
     }
 }
