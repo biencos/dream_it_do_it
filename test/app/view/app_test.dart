@@ -1,5 +1,5 @@
 import 'package:dream_it_do_it/app/app.dart';
-import 'package:dream_it_do_it/counter/counter.dart';
+import 'package:dream_it_do_it/show_wishes/view/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -36,12 +36,12 @@ void main() {
       expect(find.byType(MaterialApp), findsOneWidget);
     });
 
-    testWidgets('renders CounterPage', (tester) async {
+    testWidgets('renders ShowWishesPage', (tester) async {
       await tester.pumpWidget(
         App(wishesRepository: wishesRepository),
       );
 
-      expect(find.byType(CounterPage), findsOneWidget);
+      expect(find.byType(ShowWishesPage), findsOneWidget);
     });
   });
 }

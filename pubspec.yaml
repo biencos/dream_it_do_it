@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   bloc: ^8.1.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
@@ -17,6 +18,7 @@ dependencies:
   intl: ^0.17.0
   local_storage_wishes_api:
     path: packages/local_storage_wishes_api
+  sizer: ^2.0.15
   wishes_api:
     path: packages/wishes_api
   wishes_repository:
@@ -26,6 +28,7 @@ dev_dependencies:
   bloc_test: ^9.1.0
   flutter_test:
     sdk: flutter
+  mockingjay: ^0.3.0
   mocktail: ^0.3.0
   very_good_analysis: ^3.1.0
 

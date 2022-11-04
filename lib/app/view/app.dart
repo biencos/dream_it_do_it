@@ -1,8 +1,9 @@
-import 'package:dream_it_do_it/counter/counter.dart';
 import 'package:dream_it_do_it/l10n/l10n.dart';
+import 'package:dream_it_do_it/show_wishes/show_wishes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:sizer/sizer.dart';
 import 'package:wishes_repository/wishes_repository.dart';
 
 class App extends StatelessWidget {
@@ -12,9 +13,13 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider.value(
-      value: wishesRepository,
-      child: const AppView(),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return RepositoryProvider.value(
+          value: wishesRepository,
+          child: const AppView(),
+        );
+      },
     );
   }
 }
@@ -31,7 +36,7 @@ class AppView extends StatelessWidget {
           elevation: 0,
         ),
         colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+          accentColor: const Color(0xFF00E7F5),
         ),
       ),
       localizationsDelegates: const [
@@ -39,7 +44,7 @@ class AppView extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const ShowWishesPage(),
     );
   }
 }
