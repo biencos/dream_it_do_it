@@ -1,3 +1,4 @@
+import 'package:dream_it_do_it/add_wish/add_wish.dart';
 import 'package:dream_it_do_it/l10n/l10n.dart';
 import 'package:dream_it_do_it/show_wishes/show_wishes.dart';
 import 'package:flutter/cupertino.dart';
@@ -37,6 +38,8 @@ class ShowWishesView extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: _floatingActionButton(context),
+      resizeToAvoidBottomInset: false,
     );
   }
 
@@ -101,6 +104,34 @@ class ShowWishesView extends StatelessWidget {
               );
             },
           ),
+        );
+      },
+    );
+  }
+
+  Widget _floatingActionButton(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: Colors.black,
+      child: Icon(
+        Icons.add_rounded,
+        size: 8.w,
+        color: Theme.of(context).colorScheme.secondary,
+      ),
+      onPressed: () {
+        final borderRadius = 3.h;
+
+        showModalBottomSheet<void>(
+          isScrollControlled: true,
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(borderRadius),
+              topRight: Radius.circular(borderRadius),
+            ),
+          ),
+          builder: (builder) {
+            return const AddWishPage();
+          },
         );
       },
     );
