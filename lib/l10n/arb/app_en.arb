@@ -7,5 +7,9 @@
     "showWishesNoWishesText": "No wishes yet",
     "@showWishesNoWishesText": {
         "description": "Text shown, when the wishes list is empty, in the center of the Show Wishes Page"
+    },
+    "addWishTitleFieldHelperText": "  Type a wish",
+    "@addWishTitleFieldHelperText": {
+        "description": "Text shown in the helper text of the wish title field of the Add Wish Page"
     }
 }

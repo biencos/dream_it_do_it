@@ -181,5 +181,25 @@ void main() {
         );
       });
     });
+
+    testWidgets(
+      'renders FloatingActionButton with add rounded icon',
+      (tester) async {
+        await tester.pumpApp(
+          createViewMock(),
+          wishesRepository: wishesRepository,
+        );
+
+        expect(find.byType(FloatingActionButton), findsOneWidget);
+
+        expect(
+          find.descendant(
+            of: find.byType(FloatingActionButton),
+            matching: find.byIcon(Icons.add_rounded),
+          ),
+          findsOneWidget,
+        );
+      },
+    );
   });
 }
