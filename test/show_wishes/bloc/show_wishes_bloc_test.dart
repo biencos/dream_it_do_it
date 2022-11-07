@@ -87,5 +87,25 @@ void main() {
         ],
       );
     });
+
+    group('WishCompletionToggled', () {
+      blocTest<ShowWishesBloc, ShowWishesState>(
+        'saves wish with isCompleted set to event isCompleted flag',
+        build: createBloc,
+        seed: () => ShowWishesState(wishes: mockWishes),
+        act: (bloc) => bloc.add(
+          WishCompletionToggled(
+            wish: mockWishes.first,
+            isCompleted: true,
+          ),
+        ),
+        verify: (_) {
+          verify(
+            () => wishesRepository
+                .saveWish(mockWishes.first.copyWith(isCompleted: true)),
+          ).called(1);
+        },
+      );
+    });
   });
 }
