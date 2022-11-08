@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:dream_it_do_it/show_wishes/show_wishes.dart';
 import 'package:equatable/equatable.dart';
 import 'package:wishes_repository/wishes_repository.dart';
 
@@ -12,6 +13,7 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
         super(const ShowWishesState()) {
     on<WishesSubscriptionRequested>(_onSubscriptionRequested);
     on<WishCompletionToggled>(_onWishCompletionToggled);
+    on<WishesFilterChanged>(_onFilterChanged);
   }
 
   final WishesRepository _wishesRepository;
@@ -40,5 +42,12 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
   ) async {
     final newWish = event.wish.copyWith(isCompleted: event.isCompleted);
     await _wishesRepository.saveWish(newWish);
+  }
+
+  void _onFilterChanged(
+    WishesFilterChanged event,
+    Emitter<ShowWishesState> emit,
+  ) {
+    emit(state.copyWith(filter: () => event.filter));
   }
 }
