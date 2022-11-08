@@ -11,6 +11,7 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
   })  : _wishesRepository = wishesRepository,
         super(const ShowWishesState()) {
     on<WishesSubscriptionRequested>(_onSubscriptionRequested);
+    on<WishCompletionToggled>(_onWishCompletionToggled);
   }
 
   final WishesRepository _wishesRepository;
@@ -31,5 +32,13 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
         status: () => ShowWishesStatus.failure,
       ),
     );
+  }
+
+  Future<void> _onWishCompletionToggled(
+    WishCompletionToggled event,
+    Emitter<ShowWishesState> emit,
+  ) async {
+    final newWish = event.wish.copyWith(isCompleted: event.isCompleted);
+    await _wishesRepository.saveWish(newWish);
   }
 }

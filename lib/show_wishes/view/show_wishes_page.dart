@@ -100,6 +100,14 @@ class ShowWishesView extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 1.h),
                 child: WishesListElement(
                   wish: wish,
+                  onToggleCompleted: (isCompleted) {
+                    context.read<ShowWishesBloc>().add(
+                          WishCompletionToggled(
+                            wish: wish,
+                            isCompleted: isCompleted,
+                          ),
+                        );
+                  },
                 ),
               );
             },
