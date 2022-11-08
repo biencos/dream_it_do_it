@@ -9,10 +9,12 @@ void main() {
   group('WishesListElement', () {
     final uncompletedWish = Wish(id: 'id_1', title: 'title_1');
     final completedWish = Wish(id: 'id_1', title: 'title_1', isCompleted: true);
+    final onToggleCompletedCalls = <bool>[];
 
     Widget createElementMock({Wish? wish}) {
       return WishesListElement(
         wish: wish ?? uncompletedWish,
+        onToggleCompleted: onToggleCompletedCalls.add,
       );
     }
 
@@ -20,6 +22,43 @@ void main() {
       expect(
         () => WishesListElement(wish: uncompletedWish),
         returnsNormally,
+      );
+    });
+
+    group('checkbox', () {
+      testWidgets('is rendered', (tester) async {
+        await tester.pumpApp(createElementMock());
+
+        expect(find.byType(Checkbox), findsOneWidget);
+      });
+
+      testWidgets('is checked when wish is completed', (tester) async {
+        await tester.pumpApp(
+          createElementMock(wish: completedWish),
+        );
+
+        final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
+        expect(checkbox.value, isTrue);
+      });
+
+      testWidgets('is unchecked when wish is not completed', (tester) async {
+        await tester.pumpApp(
+          createElementMock(wish: uncompletedWish),
+        );
+
+        final checkbox = tester.widget<Checkbox>(find.byType(Checkbox));
+        expect(checkbox.value, isFalse);
+      });
+
+      testWidgets(
+        'calls onToggleCompleted with correct value when tapped',
+        (tester) async {
+          await tester.pumpApp(createElementMock(wish: uncompletedWish));
+
+          await tester.tap(find.byType(Checkbox));
+
+          expect(onToggleCompletedCalls, equals([true]));
+        },
       );
     });
 
