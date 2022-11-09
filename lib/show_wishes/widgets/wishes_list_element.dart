@@ -7,22 +7,30 @@ class WishesListElement extends StatelessWidget {
     super.key,
     required this.wish,
     this.onToggleCompleted,
+    this.onDismissed,
   });
 
   final Wish wish;
   final ValueChanged<bool>? onToggleCompleted;
+  final DismissDirectionCallback? onDismissed;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Row(
-        children: [
-          _checkbox(context),
-          Padding(
-            padding: EdgeInsets.only(left: 1.w),
-            child: _wishText(context),
-          ),
-        ],
+      child: Dismissible(
+        key: Key('wishesListElement_dismissible_${wish.id}'),
+        onDismissed: onDismissed,
+        direction: DismissDirection.endToStart,
+        background: _dismissableBackground(),
+        child: Row(
+          children: [
+            _checkbox(context),
+            Padding(
+              padding: EdgeInsets.only(left: 1.w),
+              child: _wishText(context),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -52,6 +60,21 @@ class WishesListElement extends StatelessWidget {
               color: Colors.grey,
               decoration: TextDecoration.lineThrough,
             ),
+    );
+  }
+
+  Widget _dismissableBackground() {
+    return Container(
+      alignment: Alignment.centerRight,
+      color: const Color.fromARGB(255, 134, 9, 0),
+      padding: EdgeInsets.symmetric(
+        vertical: 1.h,
+        horizontal: 2.w,
+      ),
+      child: const Icon(
+        Icons.delete_rounded,
+        color: Colors.white,
+      ),
     );
   }
 }
