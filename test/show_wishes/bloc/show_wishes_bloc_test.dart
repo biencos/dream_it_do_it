@@ -107,5 +107,18 @@ void main() {
         },
       );
     });
+
+    group('WishesFilterChanged', () {
+      blocTest<ShowWishesBloc, ShowWishesState>(
+        'emits state with updated filter',
+        build: createBloc,
+        act: (bloc) => bloc.add(
+          const WishesFilterChanged(WishesViewFilter.completedOnly),
+        ),
+        expect: () => const [
+          ShowWishesState(filter: WishesViewFilter.completedOnly),
+        ],
+      );
+    });
   });
 }

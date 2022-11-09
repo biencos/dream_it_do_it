@@ -23,3 +23,12 @@ class WishCompletionToggled extends ShowWishesEvent {
   @override
   List<Object> get props => [wish, isCompleted];
 }
+
+class WishesFilterChanged extends ShowWishesEvent {
+  const WishesFilterChanged(this.filter);
+
+  final WishesViewFilter filter;
+
+  @override
+  List<Object> get props => [filter];
+}

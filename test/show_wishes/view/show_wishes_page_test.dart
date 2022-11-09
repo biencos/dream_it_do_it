@@ -81,7 +81,7 @@ void main() {
     }
 
     testWidgets(
-      'renders AppBar with title text',
+      'renders AppBar with title text and filter button',
       (tester) async {
         await tester.pumpApp(
           createViewMock(),
@@ -94,6 +94,14 @@ void main() {
           find.descendant(
             of: find.byType(AppBar),
             matching: find.text(l10n.showWishesAppBarTitle),
+          ),
+          findsOneWidget,
+        );
+
+        expect(
+          find.descendant(
+            of: find.byType(AppBar),
+            matching: find.byType(WishesFilterButton),
           ),
           findsOneWidget,
         );
@@ -180,53 +188,53 @@ void main() {
           findsNWidgets(mockWishes.length),
         );
       });
-    });
 
-    testWidgets(
-      'adds WishCompletionToggled '
-      'to ShowWishesBloc '
-      'when WishesListElement.onToggleCompleted is called',
-      (tester) async {
-        await tester.pumpApp(
-          createViewMock(),
-          wishesRepository: wishesRepository,
-        );
+      testWidgets(
+        'adds WishCompletionToggled '
+        'to ShowWishesBloc '
+        'when WishesListElement.onToggleCompleted is called',
+        (tester) async {
+          await tester.pumpApp(
+            createViewMock(),
+            wishesRepository: wishesRepository,
+          );
 
-        final wish = mockWishes.first;
+          final wish = mockWishes.first;
 
-        final wishesListElement = tester
-            .widget<WishesListElement>(find.byType(WishesListElement).first);
-        wishesListElement.onToggleCompleted!(!wish.isCompleted);
+          final wishesListElement = tester
+              .widget<WishesListElement>(find.byType(WishesListElement).first);
+          wishesListElement.onToggleCompleted!(!wish.isCompleted);
 
-        verify(
-          () => showWishesBloc.add(
-            WishCompletionToggled(
-              wish: wish,
-              isCompleted: !wish.isCompleted,
+          verify(
+            () => showWishesBloc.add(
+              WishCompletionToggled(
+                wish: wish,
+                isCompleted: !wish.isCompleted,
+              ),
             ),
-          ),
-        ).called(1);
-      },
-    );
+          ).called(1);
+        },
+      );
 
-    testWidgets(
-      'renders FloatingActionButton with add rounded icon',
-      (tester) async {
-        await tester.pumpApp(
-          createViewMock(),
-          wishesRepository: wishesRepository,
-        );
+      testWidgets(
+        'renders FloatingActionButton with add rounded icon',
+        (tester) async {
+          await tester.pumpApp(
+            createViewMock(),
+            wishesRepository: wishesRepository,
+          );
 
-        expect(find.byType(FloatingActionButton), findsOneWidget);
+          expect(find.byType(FloatingActionButton), findsOneWidget);
 
-        expect(
-          find.descendant(
-            of: find.byType(FloatingActionButton),
-            matching: find.byIcon(Icons.add_rounded),
-          ),
-          findsOneWidget,
-        );
-      },
-    );
+          expect(
+            find.descendant(
+              of: find.byType(FloatingActionButton),
+              matching: find.byIcon(Icons.add_rounded),
+            ),
+            findsOneWidget,
+          );
+        },
+      );
+    });
   });
 }

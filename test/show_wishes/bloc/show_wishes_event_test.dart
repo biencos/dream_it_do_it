@@ -51,5 +51,23 @@ void main() {
         );
       });
     });
+
+    group('WishesFilterChanged', () {
+      test('supports value equality', () {
+        expect(
+          const WishesFilterChanged(WishesViewFilter.activeOnly),
+          equals(const WishesFilterChanged(WishesViewFilter.activeOnly)),
+        );
+      });
+
+      test('props works correctly', () {
+        expect(
+          const WishesFilterChanged(WishesViewFilter.activeOnly).props,
+          equals(<Object?>[
+            WishesViewFilter.activeOnly,
+          ]),
+        );
+      });
+    });
   });
 }
