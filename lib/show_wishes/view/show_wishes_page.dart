@@ -62,6 +62,7 @@ class ShowWishesView extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
               const Spacer(),
+              const WishesFilterButton(),
             ],
           ),
         ),
@@ -74,7 +75,7 @@ class ShowWishesView extends StatelessWidget {
 
     return BlocBuilder<ShowWishesBloc, ShowWishesState>(
       builder: (context, state) {
-        if (state.wishes.isEmpty) {
+        if (state.filteredWishes.isEmpty) {
           if (state.status == ShowWishesStatus.loading) {
             return const Center(child: CupertinoActivityIndicator());
           } else if (state.status != ShowWishesStatus.success) {
@@ -89,7 +90,7 @@ class ShowWishesView extends StatelessWidget {
           }
         }
 
-        final wishes = state.wishes.toList();
+        final wishes = state.filteredWishes.toList();
         return CupertinoScrollbar(
           child: ListView.builder(
             shrinkWrap: true,
