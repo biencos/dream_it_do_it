@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:dream_it_do_it/show_wishes/show_wishes.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:wishes_repository/wishes_repository.dart';
@@ -9,10 +11,12 @@ void main() {
     ShowWishesState createStateMock({
       ShowWishesStatus status = ShowWishesStatus.initial,
       List<Wish>? wishes,
+      WishesViewFilter filter = WishesViewFilter.activeOnly,
     }) {
       return ShowWishesState(
         status: status,
         wishes: wishes ?? mockWishes,
+        filter: filter,
       );
     }
 
@@ -20,6 +24,16 @@ void main() {
       expect(
         createStateMock(),
         equals(createStateMock()),
+      );
+    });
+
+    test('filteredWishes returns filtered wishes', () {
+      expect(
+        createStateMock(
+          wishes: mockWishes,
+          filter: WishesViewFilter.completedOnly,
+        ).filteredWishes,
+        equals(mockWishes.where((wish) => wish.isCompleted).toList()),
       );
     });
 
@@ -34,10 +48,9 @@ void main() {
       test('retains the old value for every parameter if null is provided', () {
         expect(
           createStateMock().copyWith(
-            // ignore: avoid_redundant_argument_values
             status: null,
-            // ignore: avoid_redundant_argument_values
             wishes: null,
+            filter: null,
           ),
           equals(createStateMock()),
         );
@@ -48,11 +61,13 @@ void main() {
           createStateMock().copyWith(
             status: () => ShowWishesStatus.success,
             wishes: () => [],
+            filter: () => WishesViewFilter.completedOnly,
           ),
           equals(
             createStateMock(
               status: ShowWishesStatus.success,
               wishes: [],
+              filter: WishesViewFilter.completedOnly,
             ),
           ),
         );
@@ -64,10 +79,12 @@ void main() {
         createStateMock(
           status: ShowWishesStatus.success,
           wishes: mockWishes,
+          filter: WishesViewFilter.completedOnly,
         ).props,
         equals(<Object?>[
           ShowWishesStatus.success,
           mockWishes,
+          WishesViewFilter.completedOnly,
         ]),
       );
     });
