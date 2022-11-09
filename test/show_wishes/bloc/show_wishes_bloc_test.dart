@@ -120,5 +120,24 @@ void main() {
         ],
       );
     });
+
+    group('WishDeleted', () {
+      blocTest<ShowWishesBloc, ShowWishesState>(
+        'deletes wish using repository',
+        setUp: () {
+          when(
+            () => wishesRepository.deleteWish(any()),
+          ).thenAnswer((_) async {});
+        },
+        build: createBloc,
+        seed: () => ShowWishesState(wishes: mockWishes),
+        act: (bloc) => bloc.add(WishDeleted(mockWishes.first)),
+        verify: (_) {
+          verify(
+            () => wishesRepository.deleteWish(mockWishes.first.id),
+          ).called(1);
+        },
+      );
+    });
   });
 }

@@ -14,6 +14,7 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
     on<WishesSubscriptionRequested>(_onSubscriptionRequested);
     on<WishCompletionToggled>(_onWishCompletionToggled);
     on<WishesFilterChanged>(_onFilterChanged);
+    on<WishDeleted>(_onWishDeleted);
   }
 
   final WishesRepository _wishesRepository;
@@ -49,5 +50,13 @@ class ShowWishesBloc extends Bloc<ShowWishesEvent, ShowWishesState> {
     Emitter<ShowWishesState> emit,
   ) {
     emit(state.copyWith(filter: () => event.filter));
+  }
+
+  Future<void> _onWishDeleted(
+    WishDeleted event,
+    Emitter<ShowWishesState> emit,
+  ) async {
+    final wishId = event.wish.id;
+    await _wishesRepository.deleteWish(wishId);
   }
 }

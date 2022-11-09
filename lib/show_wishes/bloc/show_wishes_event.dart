@@ -32,3 +32,12 @@ class WishesFilterChanged extends ShowWishesEvent {
   @override
   List<Object> get props => [filter];
 }
+
+class WishDeleted extends ShowWishesEvent {
+  const WishDeleted(this.wish);
+
+  final Wish wish;
+
+  @override
+  List<Object> get props => [wish];
+}
