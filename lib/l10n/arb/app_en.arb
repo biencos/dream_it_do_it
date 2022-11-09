@@ -11,5 +11,13 @@
     "addWishTitleFieldHelperText": "  Type a wish",
     "@addWishTitleFieldHelperText": {
         "description": "Text shown in the helper text of the wish title field of the Add Wish Page"
+    },
+    "showWishesAppBarToDoToggleTitle": "To Do",
+    "@showWishesAppBarToDoToggleTitle": {
+        "description": "Text shown on the To Do toggle of the AppBar of the Show Wishes Page"
+    },
+    "showWishesAppBarDoneToggleTitle": "Done",
+    "@showWishesAppBarDoneToggleTitle": {
+        "description": "Text shown on the Done toggle of the AppBar of the Show Wishes Page"
     }
 }
