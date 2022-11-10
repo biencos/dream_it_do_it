@@ -109,6 +109,9 @@ class ShowWishesView extends StatelessWidget {
                           ),
                         );
                   },
+                  onDismissed: (_) {
+                    context.read<ShowWishesBloc>().add(WishDeleted(wish));
+                  },
                 ),
               );
             },

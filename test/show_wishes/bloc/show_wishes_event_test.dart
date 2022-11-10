@@ -69,5 +69,23 @@ void main() {
         );
       });
     });
+
+    group('WishDeleted', () {
+      test('supports value equality', () {
+        expect(
+          WishDeleted(mockWish),
+          equals(WishDeleted(mockWish)),
+        );
+      });
+
+      test('props works correctly', () {
+        expect(
+          WishDeleted(mockWish).props,
+          equals(<Object?>[
+            mockWish,
+          ]),
+        );
+      });
+    });
   });
 }
