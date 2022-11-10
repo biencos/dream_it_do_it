@@ -217,6 +217,29 @@ void main() {
       );
 
       testWidgets(
+        'adds WishDeleted '
+        'to ShowWishesBloc '
+        'when WishesListElement.onDismissed is called',
+        (tester) async {
+          await tester.pumpApp(
+            createViewMock(),
+            wishesRepository: wishesRepository,
+          );
+
+          final wish = mockWishes.first;
+
+          final wishesListElement = tester.widget<WishesListElement>(
+            find.byType(WishesListElement).first,
+          );
+          wishesListElement.onDismissed!(DismissDirection.startToEnd);
+
+          verify(
+            () => showWishesBloc.add(WishDeleted(wish)),
+          ).called(1);
+        },
+      );
+
+      testWidgets(
         'renders FloatingActionButton with add rounded icon',
         (tester) async {
           await tester.pumpApp(
