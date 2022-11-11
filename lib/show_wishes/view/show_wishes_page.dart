@@ -91,7 +91,10 @@ class ShowWishesView extends StatelessWidget {
         }
 
         final wishes = state.filteredWishes.toList();
-        return CupertinoScrollbar(
+        return RawScrollbar(
+          thumbColor: Colors.black,
+          radius: Radius.circular(2.w),
+          thickness: 2.w,
           child: ListView.builder(
             shrinkWrap: true,
             itemCount: wishes.length,
@@ -123,11 +126,11 @@ class ShowWishesView extends StatelessWidget {
 
   Widget _floatingActionButton(BuildContext context) {
     return FloatingActionButton(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       child: Icon(
         Icons.add_rounded,
         size: 8.w,
-        color: Theme.of(context).colorScheme.secondary,
+        color: Colors.black,
       ),
       onPressed: () {
         final borderRadius = 3.h;
