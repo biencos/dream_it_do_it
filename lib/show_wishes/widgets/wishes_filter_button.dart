@@ -1,7 +1,6 @@
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:dream_it_do_it/l10n/l10n.dart';
 import 'package:dream_it_do_it/show_wishes/show_wishes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -15,7 +14,7 @@ class WishesFilterButton extends StatelessWidget {
 
     return Material(
       borderRadius: BorderRadius.circular(5.h),
-      elevation: 1.h,
+      elevation: 1.w,
       child: CustomSlidingSegmentedControl<WishesViewFilter>(
         children: {
           WishesViewFilter.activeOnly: _WishesFilterButtonTile(
@@ -28,11 +27,11 @@ class WishesFilterButton extends StatelessWidget {
         },
         initialValue: WishesViewFilter.activeOnly,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 184, 184, 184),
+          color: const Color(0xFF1f1f1f),
           borderRadius: BorderRadius.circular(5.h),
         ),
         thumbDecoration: BoxDecoration(
-          color: CupertinoColors.black,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(5.h),
           boxShadow: [
             BoxShadow(
@@ -70,9 +69,7 @@ class _WishesFilterButtonTile extends StatelessWidget {
         return Text(
           title,
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: state.filter == filter
-                    ? Theme.of(context).colorScheme.secondary
-                    : Colors.black,
+                color: state.filter == filter ? Colors.black : Colors.white,
               ),
         );
       },
