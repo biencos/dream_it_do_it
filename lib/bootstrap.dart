@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:dream_it_do_it/app/view/app.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:wishes_api/wishes_api.dart';
 import 'package:wishes_repository/wishes_repository.dart';
@@ -30,8 +31,13 @@ void bootstrap({required WishesApi wishesApi}) {
 
   final wishesRepository = WishesRepository(wishesApi: wishesApi);
 
+  WidgetsFlutterBinding.ensureInitialized();
+
   runZonedGuarded(
-    () => runApp(App(wishesRepository: wishesRepository)),
+    () => SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]).then((_) => runApp(App(wishesRepository: wishesRepository))),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }
